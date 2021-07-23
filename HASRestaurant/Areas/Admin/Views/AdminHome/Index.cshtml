@@ -1,0 +1,178 @@
+﻿@using System.Globalization;
+@using HASRestaurant.Context;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href="~/Content/admin/assests/css/manager.css" rel="stylesheet" />
+<style>
+    .datewidth {
+        width: 100px;
+    }
+</style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row m-t-25">
+            <div class="col-sm-6 col-lg-3">
+                <div class="overview-item overview-item--c1">
+                    <div class="overview__inner">
+                        <div class="overview-box clearfix">
+                            <div class="icon">
+                                <i class="zmdi zmdi-account-o"></i>
+                            </div>
+                            <div class="text">
+                                @{
+                                    PRN292_HASRestaurantEntities objModel = new PRN292_HASRestaurantEntities();
+                                    var countReservation = objModel.Reservations.ToList().Count;
+                                }
+                                <h2>@countReservation</h2>
+                                <span>Reservation</span>
+                            </div>
+                        </div>
+                        <div class="overview-chart">
+                            <canvas id="widgetChart1"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="overview-item overview-item--c2">
+                    <div class="overview__inner">
+                        <div class="overview-box clearfix">
+                            <div class="icon">
+                                <i class="zmdi zmdi-shopping-cart"></i>
+                            </div>
+                            <div class="text">
+                                @{ 
+                                    var itemSolid = objModel.Database.SqlQuery<int>("select SUM(Quantity) from OrderDetail").First();
+                                }
+                                <h2>@itemSolid</h2>
+                                <span>Items solid</span>
+                            </div>
+                        </div>
+                        <div class="overview-chart">
+                            <canvas id="widgetChart2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="overview-item overview-item--c3">
+                    <div class="overview__inner">
+                        <div class="overview-box clearfix">
+                            <div class="icon">
+                                <i class="zmdi zmdi-calendar-note"></i>
+                            </div>
+                            <div class="text">
+                                @{
+                                    var countProduct = objModel.Products.ToList().Count;
+                                }
+                                <h2>@countProduct</h2>
+                                <span>Product</span>
+                            </div>
+                        </div>
+                        <div class="overview-chart">
+                            <canvas id="widgetChart3"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="overview-item overview-item--c4">
+                    <div class="overview__inner">
+                        <div class="overview-box clearfix">
+                            <div class="icon">
+                                <i class="zmdi zmdi-money"></i>
+                            </div>
+                            <div class="text">
+                                @{ 
+                                    var totalEarning = objModel.Database.SqlQuery<double>("select SUM(TotalPrice) from [Order]").First();
+                                }
+                                <h2>@totalEarning</h2>
+                                <span>Total earnings</span>
+                            </div>
+                        </div>
+                        <div class="overview-chart">
+                            <canvas id="widgetChart4"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- table---------------------------------------------------------------------- -->
+        @if (ViewBag.note != null)
+        {
+            <h1 class="text-danger">@ViewBag.note</h1>
+        }
+        @using (Html.BeginForm("SearchDate", "AdminHome", FormMethod.Post))
+        {
+            <div class="selectWeek">
+                <label for="week">Select a week:</label>
+                <input type="date" id="week" name="week" value="@ViewBag.weekNum" required>
+                <button type="submit" class="btnSearch">Search</button>
+            </div>
+        }
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="datewidth">Date</th>
+                        <th scope="col">Breakfast</th>
+                        <th scope="col">Lunch</th>
+                        <th scope="col">Dinner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        for (int i = 0; i < 7; i++)
+                        {
+                            <tr>
+                                @{
+                                    DateTime d = ((DateTime)Session["dateFirst"]).AddDays(i);
+                                    var dataDinner = objModel.Reservations.SqlQuery("select * from Reservation where ReservationDate = '" + d.ToString("yyyy-MM-dd") + "' and Time = 'Dinner'").FirstOrDefault();
+                                    var dataBreakfast = objModel.Reservations.SqlQuery("select * from Reservation where ReservationDate = '" + d.ToString("yyyy-MM-dd") + "' and Time = 'Breakfast'").FirstOrDefault();
+                                    var dataLunch = objModel.Reservations.SqlQuery("select * from Reservation where ReservationDate = '" + d.ToString("yyyy-MM-dd") + "' and Time = 'Lunch'").FirstOrDefault();
+                                }
+                                <th scope="row">@d.ToString("dd-MM-yyyy")</th>
+                                @if (dataBreakfast == null)
+                                {
+                                    <td></td>
+                                }
+                                else
+                                {
+                                    <td><a href="@Url.Action("Details","AdminReservation",new { id = dataBreakfast.ReservationID})">@dataBreakfast.CustomerName</a></td>
+                                }
+                                @if (dataLunch == null)
+                                {
+                                    <td></td>
+                                }
+                                else
+                                {
+                                    <td> <a href="@Url.Action("Details","AdminReservation",new { id = dataLunch.ReservationID})"> @dataLunch.CustomerName </a></td>
+                                }
+                                @if (dataDinner == null)
+                                {
+                                    <td></td>
+                                }
+                                else
+                                {
+                                    <td><a href="@Url.Action("Details","AdminReservation",new { id = dataDinner.ReservationID})">@dataDinner.CustomerName</a></td>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+

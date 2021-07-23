@@ -1,0 +1,316 @@
+﻿@using PagedList;
+@using PagedList.Mvc
+@model HASRestaurant.Models.Product_Category
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/assets/css/menu.css" rel="stylesheet" />
+<style>
+    .quantityRed {
+        color: red;
+    }
+
+    .quantityGreen {
+        color: green;
+    }
+
+    .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 10px 205px;
+        border-radius: 4px;
+    }
+
+        .pagination > li {
+            display: inline;
+        }
+
+            .pagination > li > a, .pagination > li > span {
+                position: relative;
+                float: left;
+                padding: 6px 12px;
+                margin-left: -1px;
+                line-height: 1.428571429;
+                text-decoration: none;
+                background-color: #ffffff;
+                border: 1px solid #dddddd;
+            }
+
+            .pagination > li:first-child > a, .pagination > li:first-child > span {
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+
+            .pagination > li > a:hover,
+            .pagination > li > span:hover,
+            .pagination > li > a:focus,
+            .pagination > li > span:focus {
+                background-color: #eeeeee;
+            }
+
+        .pagination > .active > a,
+        .pagination > .active > span,
+        .pagination > .active > a:hover,
+        .pagination > .active > span:hover,
+        .pagination > .active > a:focus,
+        .pagination > .active > span:focus {
+            z-index: 2;
+            color: #ffffff;
+            cursor: default;
+            background-color: #fb5849;
+            border-color: #fb5849;
+        }
+
+        .pagination > .disabled > span,
+        .pagination > .disabled > a,
+        .pagination > .disabled > a:hover,
+        .pagination > .disabled > a:focus {
+            color: #999999;
+            cursor: not-allowed;
+            background-color: #ffffff;
+            border-color: #dddddd;
+        }
+
+    .pagination-lg > li > a,
+    .pagination-lg > li > span {
+        padding: 10px 16px;
+        font-size: 18px;
+    }
+
+    .pagination-lg > li:first-child > a,
+    .pagination-lg > li:first-child > span {
+        border-bottom-left-radius: 6px;
+        border-top-left-radius: 6px;
+    }
+
+    .pagination-lg > li:last-child > a,
+    .pagination-lg > li:last-child > span {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+
+    .pagination-sm > li > a,
+    .pagination-sm > li > span {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .pagination-sm > li:first-child > a,
+    .pagination-sm > li:first-child > span {
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+
+    .pagination-sm > li:last-child > a,
+    .pagination-sm > li:last-child > span {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+
+    .pager {
+        padding-left: 0;
+        margin: 20px 0;
+        text-align: center;
+        list-style: none;
+    }
+
+        .pager:before, .pager:after {
+            display: table;
+            content: " ";
+        }
+
+        .pager:after {
+            clear: both;
+        }
+
+        .pager:before, .pager:after {
+            display: table;
+            content: " ";
+        }
+
+        .pager:after {
+            clear: both;
+        }
+
+        .pager li {
+            display: inline;
+        }
+
+            .pager li > a,
+            .pager li > span {
+                display: inline-block;
+                padding: 5px 14px;
+                background-color: #ffffff;
+                border: 1px solid #dddddd;
+                border-radius: 15px;
+            }
+
+                .pager li > a:hover,
+                .pager li > a:focus {
+                    text-decoration: none;
+                    background-color: #eeeeee;
+                }
+
+        .pager .next > a,
+        .pager .next > span {
+            float: right;
+        }
+
+        .pager .previous > a,
+        .pager .previous > span {
+            float: left;
+        }
+
+        .pager .disabled > a,
+        .pager .disabled > a:hover,
+        .pager .disabled > a:focus,
+        .pager .disabled > span {
+            color: #999999;
+            cursor: not-allowed;
+            background-color: #ffffff;
+        }
+</style>
+<!-- ***** Menu Area Starts ***** -->
+<section class="section" id="offers">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4 text-center">
+                <div class="section-heading">
+                    <h6>Our Menu</h6>
+                    <h2>Special Meal Offers</h2>
+                    @using (Html.BeginForm("Index", "Menu", FormMethod.Get))
+                    {
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                        //<input type="text">
+                        <button type="submit">Search</button>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row" id="tabs">
+                    <div class="col-lg-12">
+                        <div class="heading-tabs">
+                            <div class="row">
+                                <div class="col-lg-6 offset-lg-3">
+                                    <ul>
+                                        <li>
+                                            <img src="~/Content/assets/images/tab-icon-03.png" alt="">
+                                            @*<button onclick="location.href='/Menu'" class="btnCategory active">All</button>*@
+                                            <button onclick="location.href = '@Url.Action("Index", "Menu", new { Id = 0, page = 1, CurrentFilter = ViewBag.CurrentFilter })'" class="@(ViewBag.Id == 0 || ViewBag.Id == null ? "btnCategory active":"btnCategory")">All</button>
+                                        </li>
+                                        @foreach (var item in Model.ListCategory)
+                                        {
+                                            <li>
+                                                <img src="~/Content/assets/images/tab-icon-03.png" alt="">
+                                                <button onclick="location.href='@Url.Action("Index", "Menu", new { Id = item.CategoryID, page = 1, CurrentFilter = ViewBag.CurrentFilter })'" class="@(item.CategoryID == ViewBag.Id ? "btnCategory active": "btnCategory")">@item.CategoryName</button>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <section class='tabs-content'>
+                            <article id='tabs-1'>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="left-list">
+                                                @{
+                                                    int size = 0;
+                                                    if (Model.ListProduct.Count % 2 == 0)
+                                                    {
+                                                        size = Model.ListProduct.Count / 2;
+                                                    }
+                                                    else
+                                                    {
+                                                        size = (Model.ListProduct.Count / 2) + 1;
+                                                    }
+                                                }
+                                                @for (int i = 0; i < size; i++)
+                                                {
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="@Model.ListProduct[i].Image" alt="">
+                                                            <a href="@Url.Action("Index", "Detail", new { Id = Model.ListProduct[i].ProductID})">
+                                                                <h4>@Model.ListProduct[i].ProductName</h4>
+                                                            </a>
+                                                            @{
+                                                                var classNameCheck = "quantityGreen";
+                                                                var sl = "In Stock";
+                                                                if (Model.ListProduct[i].Quantity == 0)
+                                                                {
+                                                                    sl = "Out Stock";
+                                                                    classNameCheck = "quantityRed";
+                                                                }
+                                                            }
+                                                            <h6>$@Model.ListProduct[i].Price - <span class="@classNameCheck">@sl</span></h6>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.</p>
+                                                            <div class="price">
+                                                                <a href="@Url.Action("OrderNow","Cart", new { id = Model.ListProduct[i].ProductID})">
+                                                                    Order
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="right-list">
+                                                @for (int i = size; i < Model.ListProduct.Count; i++)
+                                                {
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="@Model.ListProduct[i].Image" alt="">
+                                                            <a href="@Url.Action("Index", "Detail", new { Id = Model.ListProduct[i].ProductID})">
+                                                                <h4>@Model.ListProduct[i].ProductName</h4>
+                                                            </a>
+                                                            @{
+                                                                var classNameCheck = "quantityGreen";
+                                                                var sl = "In Stock";
+                                                                if (Model.ListProduct[i].Quantity == 0)
+                                                                {
+                                                                    sl = "Out Stock";
+                                                                    classNameCheck = "quantityRed";
+                                                                }
+                                                            }
+                                                            <h6>$@Model.ListProduct[i].Price - <span class="@classNameCheck">@sl</span></h6>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.</p>
+                                                            <div class="price">
+                                                                <a href="@Url.Action("OrderNow","Cart", new { id = Model.ListProduct[i].ProductID})">
+                                                                    Order
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.PagedListPager(Model.ListProduct, page => Url.Action("Index", new { Id = ViewBag.Id, page = page, CurrentFilter = ViewBag.CurrentFilter }))
+</section>
+@if (ViewBag.mess != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+                        alert("@ViewBag.mess");
+                    };
+    </script>
+}
+<!-- ***** Chefs Area Ends ***** -->

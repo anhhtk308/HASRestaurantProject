@@ -1,0 +1,96 @@
+﻿@model IEnumerable<HASRestaurant.Context.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .listright {
+        margin-left: 273px;
+    }
+
+        .listright h2 {
+            margin-bottom: 20px;
+        }
+
+    td img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .listright p a {
+        color: #ffffff;
+        background-color: #fb5849;
+        padding: 10px;
+    }
+
+        .listright p a:hover {
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+
+    .listright td a:hover {
+        color: #ff0000;
+    }
+</style>
+<div class="listright">
+    <h2>Manager Order</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details","AdminOrder", new { id = item.OrderID})" class="fas fa-file-alt"></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

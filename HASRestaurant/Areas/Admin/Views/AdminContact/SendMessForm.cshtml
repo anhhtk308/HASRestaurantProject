@@ -1,0 +1,81 @@
+﻿@model HASRestaurant.Context.Contact
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Content/admin/assests/js/ckeditor_4.16.1_standard/ckeditor/ckeditor.js"></script>
+<style>
+    .listright {
+        margin-left: 273px;
+    }
+
+        .listright h2 {
+            margin-bottom: 20px;
+        }
+</style>
+<div class="listright">
+    <h2>Send Message</h2>
+
+    <div>
+        <h4>Contact</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dd>
+                @Html.DisplayNameFor(model => model.CustomerName): @Html.DisplayFor(model => model.CustomerName)
+            </dd>
+
+            <dd>
+                @Html.DisplayNameFor(model => model.Phone): @Html.DisplayFor(model => model.Phone)
+            </dd>
+
+            <dd>
+                @Html.DisplayNameFor(model => model.Address): @Html.DisplayFor(model => model.Address)
+            </dd>
+
+            <dd>
+                @Html.DisplayNameFor(model => model.Email): @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dd>
+                @Html.DisplayNameFor(model => model.Message): @Html.DisplayFor(model => model.Message)
+            </dd>
+
+            <dd>
+                @Html.DisplayNameFor(model => model.Status): @Html.DisplayFor(model => model.Status)
+            </dd>
+            <dd>
+                @Html.DisplayNameFor(model => model.CreateMessageDate): @Html.DisplayFor(model => model.CreateMessageDate)
+            </dd>
+            <dd>
+                @Html.DisplayNameFor(model => model.ResponseMessage):
+            </dd>
+            <div>
+                @*@Html.TextAreaFor(model => model.ResponseMessage, new { htmlAttributes = new { @class = "form-control", @name = "ResponseMessage" } })
+                    <script type="text/javascript">
+                        CKEDITOR.replace('ResponseMessage');
+                        CKEDITOR.config.autoParagraph = false;
+                    </script>*@
+                @using (Html.BeginForm("SendMess", "AdminContact", new { id = Model.ContactID }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @*<textarea class="form-control" name="ResponseMessage" id="ResponseMessage"></textarea>*@
+                    @Html.TextAreaFor(model => model.ResponseMessage, new { @class = "form-control", @name = "ResponseMessage" })
+                    <script type="text/javascript">
+                        CKEDITOR.replace('ResponseMessage');
+                        //CKEDITOR.config.autoParagraph = false;
+                    </script>
+                    <input type="submit" value="Send Mess" class="btn btn-default" />
+
+                    @Html.ActionLink("Back to List", "Index")
+                }
+            </div>
+        </dl>
+    </div>
+    @*<p>
+            @Html.ActionLink("Send Mess", "SendMess", new { id = Model.ContactID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>*@
+
+</div>

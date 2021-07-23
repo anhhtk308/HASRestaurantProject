@@ -1,0 +1,89 @@
+.logo img{
+    width: 155px;
+    height: 58px;
+}
+.col-12 {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.cart {
+    margin-top: 100px;
+}
+
+.cart-title {
+    /* padding-right: 50px; */
+    margin-bottom: 30px;
+    margin-left: 50px;
+}
+
+.cart_product_img img {
+    width: 120px;
+    height: 100px;
+}
+
+.cart-summary {
+    background-color: #f86c5f;
+    /* margin-top: 118px; */
+    position: relative;
+    z-index: 1;
+    padding: 30px 20px;
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    margin-bottom: 75px;
+}
+
+.cart-table-area table thead tr th {
+    background-color: #f86c5f;
+    border-top: none;
+    border-bottom: none;
+    -webkit-box-flex: 0;
+    flex: 0 0 25%;
+    width: 25%;
+    max-width: 25%;
+    color: #242424;
+    text-transform: capitalize;
+    font-weight: 400;
+    vertical-align: bottom;
+    text-align: inherit;
+    display: table-cell;
+}
+
+.cart-table-area table tbody tr th h5 {
+    color: #242424;
+    line-height: 1.3;
+    font-weight: 400;
+    margin-bottom: .5rem;
+    margin-top: 0;
+    display: block;
+    border-collapse: collapse;
+}
+
+.amado-btn {
+    display: inline-block;
+    min-width: 160px;
+    height: 55px;
+    color: #f86c5f;
+    border: none;
+    border-radius: 0;
+    padding: 0 7px;
+    font-size: 18px;
+    line-height: 56px;
+    background-color: #ffffff;
+    font-weight: 400;
+}
+
+.summary-table li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.cart-summary ul {
+    padding-bottom: 20px;
+}

@@ -1,0 +1,27 @@
+﻿@model HASRestaurant.Context.Account
+
+@{
+    ViewBag.Title = "ChangePass";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@using (Html.BeginForm("ChangePass", "Login", FormMethod.Post))
+{
+    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Change Password</h1>
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    @* @Html.TextBoxFor(Model => Model.ConfirmPassword, new { @name = "ConfirmPassword", @type = "password", @id = "user-pass", @class = "form-control", @placeholder = "Confirm Password", @autofocus = "" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })*@
+    <input type="text" name="username" class="form-control" placeholder="username" required="">
+
+    <input type="password" name="password" class="form-control" placeholder="password" required="">
+
+    <input type="password" name="NewPassword" class="form-control" placeholder="New password" required="">
+
+    <input type="password" name="confirmPass" class="form-control" placeholder="Confirm password" required="">
+
+
+    <button class="btn btn-warning btn-block" type="submit"><i class="fas fa-user-plus"></i>Submit</button>
+    <a href="@Url.Action("Index","Login")" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
+}
+

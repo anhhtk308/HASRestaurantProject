@@ -1,0 +1,134 @@
+﻿@using HASRestaurant.Models;
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="~/Content/assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="~/Content/assets/css/font-awesome.css">
+<link rel="stylesheet" href="~/Content/assets/css/templatemo-klassy-cafe.css">
+<link rel="stylesheet" href="~/Content/assets/css/owl-carousel.css">
+<link rel="stylesheet" href="~/Content/assets/css/lightbox.css">
+<link rel="stylesheet" href="~/Content/assets/css/cart.css">
+
+@{
+    if (Session["cart"] != null && ((List<CartModel>)Session["cart"]).Count > 0)
+    {
+        <!-- ***** Header Area End ***** -->
+        <div class="cart">
+            <section class="section" id="mycart">
+
+                <div class="cart-table-area section-padding-100">
+                    <div class="container-fluid">
+                        <div class="cart-title mt-50">
+                            <h2>My Cart</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-lg-8">
+                                <div class="cart-table clearfix">
+                                    <table class="table table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in (List<CartModel>)Session["cart"])
+                                            {
+                                                <tr>
+                                                    <td class="cart_product_img">
+                                                        <a href="#"><img src="@item.Product.Image" alt="Product"></a>
+                                                    </td>
+                                                    <td class="cart_product_desc">
+                                                        <h6>@item.Product.ProductName</h6>
+                                                    </td>
+                                                    <td class="price">
+                                                        <span>$@item.Product.Price</span>
+                                                    </td>
+                                                    <td class="qty">
+                                                        <a href="@Url.Action("SubQuantity", "Cart", new { id = item.Product.ProductID})" style="color: #f86c5f;"><button class="btnSub">-</button></a>
+                                                        <strong>@item.Quantity</strong>
+                                                        <a href="@Url.Action("AddQuantity", "Cart", new { id = item.Product.ProductID})" style="color: #f86c5f;"><button class="btnAdd">+</button></a>
+                                                        <a href="@Url.Action("Delete", "Cart", new { id = item.Product.ProductID })">
+                                                            <i class="glyphicon glyphicon-trash" style="color:#f86c5f; margin-left: 180px;"></i>
+                                                        </a>
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <div class="cart-summary">
+                                    <h5>Cart Total</h5>
+                                    <ul class="summary-table">
+                                        @{
+                                            List<CartModel> temp = (List<CartModel>)Session["cart"];
+                                            var total = temp.Sum(x => x.Quantity * x.Product.Price);
+                                        }
+                                        <li class=""><span>Subtotal:</span> <span class="price"></span></li>
+                                        @foreach (var item in (List<CartModel>)Session["cart"])
+                                        {
+                                            <li class=""><span>@item.Product.ProductName</span> <span class="price">$@(item.Product.Price * item.Quantity)</span></li>
+                                        }
+                                        <li><span>Delivery:</span> <span>Free</span></li>
+                                        <li><span>Total:</span> <span>$@total</span></li>
+                                    </ul>
+                                    <div class="cart-btn mt-100">
+                                        <a href="@Url.Action("Index","CheckOut")" class="btn amado-btn w-100">Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div> }
+    else
+    {
+        <div class="cart">
+            <section class="section" id="mycart">
+
+                <div class="cart-table-area section-padding-100">
+                    <div class="container-fluid">
+                        <div class="cart-title mt-50">
+                            <h2>My Cart</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-lg-8">
+                                <div class="cart-table clearfix">
+                                    <table class="table table-responsive">
+                                        <br/>
+                                        <br/>
+                                        <h1>No item in your cart!!!</h1>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <div class="cart-summary">
+                                    <h5>Cart Total</h5>
+                                    <ul class="summary-table">
+                                        <li class=""><span>Subtotal:</span> <span class="price"></span></li>
+                                        <li><span>Delivery:</span> <span>Free</span></li>
+                                        <li><span>Total:</span> <span>$0</span></li>
+                                    </ul>
+                                    <div class="cart-btn mt-100">
+                                        <a href="#" class="btn amado-btn w-100" onclick="alert('Please order something!')">Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    }
+}

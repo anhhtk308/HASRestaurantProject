@@ -1,0 +1,26 @@
+﻿@model HASRestaurant.Context.Account
+@{
+    ViewBag.Title = "RegisterIndex";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@using (Html.BeginForm("SendCode", "Login", FormMethod.Post))
+{
+    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign up</h1>
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+
+    @Html.TextBoxFor(Model => Model.UserName, new { @name = "user", @type = "text", @id = "user-name", @class = "form-control", @placeholder = "User name", @autofocus = "", @required = "" })
+    @*@Html.ValidationMessageFor(m => m.UserName)*@
+    @Html.TextBoxFor(Model => Model.Password, new { @name = "pass", @type = "password", @id = "user-pass", @class = "form-control", @placeholder = "Password", @autofocus = "", @required = "" })
+    @*@Html.ValidationMessageFor(m => m.Password)*@
+    @Html.TextBoxFor(Model => Model.Email, new { @name = "email", @type = "text", @id = "user-mail", @class = "form-control", @placeholder = "Email", @required = "", @autofocus = "", @pattern = @"[a-z0-9._ % +-]+@[a-z0-9.-]+\.[a-z]{2,}$" })
+    @*@Html.ValidationMessageFor(m => m.Email)*@
+
+
+    <button class="btn btn-warning btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+    <a href="@Url.Action("Index","Login")" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
+}
+
+

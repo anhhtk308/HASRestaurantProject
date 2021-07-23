@@ -1,0 +1,284 @@
+﻿@*@model List<HASRestaurant.Context.Product>*@
+@model HASRestaurant.Models.Product_Reservation
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="left-content">
+                    <div class="inner-content">
+                        <h4>HASRestaurant</h4>
+                        <h6>THE BEST EXPERIENCE</h6>
+                        <div class="main-white-button scroll-to-section">
+                            <a href="#reservation">Make A Reservation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="main-banner header-text">
+                    <div class="Modern-Slider">
+                        <!-- Item -->
+                        <div class="item">
+                            <div class="img-fill">
+                                <img src="~/Content/assets/images/slide-01.jpg" alt="">
+                            </div>
+                        </div>
+                        <!-- // Item -->
+                        <!-- Item -->
+                        <div class="item">
+                            <div class="img-fill">
+                                <img src="~/Content/assets/images/slide-02.jpg" alt="">
+                            </div>
+                        </div>
+                        <!-- // Item -->
+                        <!-- Item -->
+                        <div class="item">
+                            <div class="img-fill">
+                                <img src="~/Content/assets/images/slide-03.jpg" alt="">
+                            </div>
+                        </div>
+                        <!-- // Item -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+<!-- ***** About Area Starts ***** -->
+<section class="section" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-xs-12">
+                <div class="left-text-content">
+                    <div class="section-heading">
+                        <h6>About Us</h6>
+                        <h2>We Leave A Delicious Memory For You</h2>
+                    </div>
+                    <p>
+                        HAS restaurant is one of the best <a href="https://templatemo.com/tag/restaurant" target="_blank" rel="sponsored">restaurant HTML templates</a> with Bootstrap v4.5.2 CSS framework. You can download and feel free to use this website
+                        template layout for your restaurant business. You are allowed to use this template for commercial purposes. <br><br>You are NOT allowed to redistribute the template ZIP file on any template donwnload website. Please contact
+                        us for more information.
+                    </p>
+                    <div class="row">
+                        @foreach (var item in Model.ListProduct.Take(3))
+                        {
+                            <div class="col-4">
+                                <img src="@item.Image" alt="">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-12">
+                <div class="right-content">
+                    <div class="thumb">
+                        <a rel="nofollow" href="http://youtube.com"><i class="fa fa-play"></i></a>
+                        <img src="~/Content/assets/images/about-video-bg.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** About Area Ends ***** -->
+<!-- ***** Menu Area Starts ***** -->
+<section class="section" id="menu">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="section-heading">
+                    <h6>BEST SELLER</h6>
+                    <h2>Our selection of cakes with quality taste</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="menu-item-carousel">
+        <div class="col-lg-12">
+            <div class="owl-menu-item owl-carousel">
+                @foreach (var item in Model.ListProduct)
+                {
+                    <div class="item">
+                        <div class='card' style="background-image: url('@item.Image')">
+                            <div class="price">
+                                <h6>$@item.Price</h6>
+                            </div>
+                            <div class='info'>
+                                <h1 class='title'>@item.ProductName</h1>
+                                <p class='description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                <div class="main-text-button">
+                                    <div class="scroll-to-section"><a href="#reservation">Make Reservation <i class="fa fa-angle-down"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Menu Area Ends ***** -->
+<!-- ***** Chefs Area Starts ***** -->
+<section class="section" id="chefs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4 text-center">
+                <div class="section-heading">
+                    <h6>Our Chefs</h6>
+                    <h2>We offer the best ingredients for you</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="chef-item">
+                    <div class="thumb">
+                        <div class="overlay"></div>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                        <img src="~/Content/assets/images/chefs-01.jpg" alt="Chef #1">
+                    </div>
+                    <div class="down-content">
+                        <h4>Randy Walker</h4>
+                        <span>Pastry Chef</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="chef-item">
+                    <div class="thumb">
+                        <div class="overlay"></div>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        </ul>
+                        <img src="~/Content/assets/images/chefs-02.jpg" alt="Chef #2">
+                    </div>
+                    <div class="down-content">
+                        <h4>David Martin</h4>
+                        <span>Cookie Chef</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="chef-item">
+                    <div class="thumb">
+                        <div class="overlay"></div>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google"></i></a></li>
+                        </ul>
+                        <img src="~/Content/assets/images/chefs-03.jpg" alt="Chef #3">
+                    </div>
+                    <div class="down-content">
+                        <h4>Peter Perkson</h4>
+                        <span>Pancake Chef</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Chefs Area Ends ***** -->
+<!-- ***** Reservation Us Area Starts ***** -->
+<section class="section" id="reservation">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 align-self-center">
+                <div class="left-text-content">
+                    <div class="section-heading">
+                        <h6>Contact Us</h6>
+                        <h2>Here You Can Make A Reservation Or Just walkin to our cafe</h2>
+                    </div>
+                    <p>Donec pretium est orci, non vulputate arcu hendrerit a. Fusce a eleifend riqsie, namei sollicitudin urna diam, sed commodo purus porta ut.</p>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="phone">
+                                <i class="fa fa-phone"></i>
+                                <h4>Phone Numbers</h4>
+                                <span><a href="#">080-090-0990</a><br><a href="#">080-090-0880</a></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="message">
+                                <i class="fa fa-envelope"></i>
+                                <h4>Emails</h4>
+                                <span><a href="#">hello@company.com</a><br><a href="#">info@company.com</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="contact-form">
+                    @using (Html.BeginForm("ReservationHome", "Home", FormMethod.Post, new { @id = "contact" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4>Table Reservation</h4>
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+                                @Html.TextBoxFor(Model => Model.Reservation.CustomerName, new { @name = "name", @type = "text", @id = "name", @placeholder = "Your Name*", @required = "" })
+                                @Html.ValidationMessageFor(Model => Model.Reservation.CustomerName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+                                @Html.TextBoxFor(Model => Model.Reservation.Email, new { @name = "email", @type = "email", @id = "email", @placeholder = "Your Email Address", @required = "" })
+                                @Html.ValidationMessageFor(Model => Model.Reservation.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+                                @Html.TextBoxFor(Model => Model.Reservation.Phone, new { @name = "phone", @type = "text", @id = "phone", @placeholder = "Phone Number*", @required = "" })
+                                @Html.ValidationMessageFor(Model => Model.Reservation.Phone, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                @Html.DropDownListFor(Model => Model.Reservation.NumOfGuests, (IEnumerable<SelectListItem>)ViewBag.numOfGuests, htmlAttributes: new { @name = "number-guests", @id = "number-guests" })
+                                @Html.ValidationMessageFor(Model => Model.Reservation.NumOfGuests, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6">
+                                <div id="filterDate2">
+                                    @Html.EditorFor(Model => Model.Reservation.ReservationDate, new { htmlAttributes = new { @type = "date", @name = "date", @id = "date", @class = "form-control", @placeholder = "dd/mm/yyyy" } })
+                                    @Html.ValidationMessageFor(Model => Model.Reservation.ReservationDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                @Html.DropDownListFor(Model => Model.Reservation.Time, (IEnumerable<SelectListItem>)ViewBag.timeReservation, htmlAttributes: new { @name = "time", @id = "time" })
+                                @Html.ValidationMessageFor(Model => Model.Reservation.Time, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-12">
+                                @Html.TextAreaFor(Model => Model.Reservation.Message, new { @name = "message", @rows = "6", @id = "message", @placeholder = "Message" })
+                                @Html.ValidationMessageFor(Model => Model.Reservation.Message, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="main-button-icon">Make A Reservation</button>
+                                </fieldset>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@if (ViewBag.mess != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+                        alert("@ViewBag.mess");
+                    };
+    </script>
+}
+<!-- ***** Reservation Area Ends ***** -->
+<!-- ***** Menu Area Starts ***** -->
+<!-- ***** Chefs Area Ends ***** -->

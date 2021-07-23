@@ -1,0 +1,45 @@
+.btnCategory {
+    border: none;
+    text-transform: capitalize;
+    width: 100%;
+    display: inline-block;
+    font-size: 15px;
+    color: #2a2a2a;
+    font-weight: 600;
+    transition: all 0.3s;
+    text-align: center;
+    background: #fff;
+}
+
+.active,
+.btnCategory:hover {
+        border: none;
+        color: #fb5849;
+        position: relative;
+        outline: none;
+}
+
+.price {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    width: 70px;
+    height: 70px;
+    background-color: #fb5849;
+    display: inline-block;
+    text-align: center;
+    line-height: 70px;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+    .price a {
+        color: #fff;
+    }
+
+.section-heading button {
+    background-color: #fb5849;
+    border-color: #fb5849;
+}

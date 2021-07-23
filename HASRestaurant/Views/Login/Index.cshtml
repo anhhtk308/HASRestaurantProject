@@ -1,0 +1,20 @@
+﻿@model HASRestaurant.Context.Account
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "form-signin" }))
+{
+    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
+    @Html.TextBoxFor(Model => Model.UserName, new { @name = "user", @type = "text", @id = "inputEmail", @class = "form-control", @placeholder = "Username", @autofocus = "", @required=""})
+    @Html.ValidationMessageFor(Model => Model.UserName, "", new { @class = "text-danger" })
+    @Html.TextBoxFor(Model => Model.Password, new { @name = "pass", @type = "password", @id = "inputPassword", @class = "form-control", @placeholder = "Password", @required = "" })
+    @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
+    <a>@Html.ActionLink("Forgot Password?", "ForgotPassword", "Login", null, new { @class = "", @type = "button", @id = "btn-signup" })</a>
+
+    <button class="btn btn-warning btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+    <hr>
+    @Html.ActionLink("Sign up New Account", "RegisterIndex", "Login", null, new { @class = "btn btn-dark btn-block", @type = "button", @id = "btn-signup" })
+    @Html.ActionLink("Change Password", "ChangePass", "Login", null, new { @class = "btn btn-dark btn-block", @type = "button", @id = "btn-change" })
+}

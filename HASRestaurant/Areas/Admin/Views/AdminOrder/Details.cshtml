@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    th {
+        background-color: #fb5849;
+    }
+
+    .listright {
+        margin-left: 273px;
+    }
+
+    h5 {
+        float: right;
+        margin-right: 50px;
+    }
+</style>
+
+<div class="listright">
+    <h2>Order Detail</h2>
+    <h5>
+        @Html.ActionLink("Back to List", "Index")
+    </h5>
+    <table class="table" border="1">
+
+        <tr>
+            <th>
+                OrderID
+            </th>
+            <th>
+                ProductID
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Unit Price
+            </th>
+        </tr>
+        @model List<HASRestaurant.Context.OrderDetail>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.OrderID
+                </td>
+                <td>
+                    @item.ProductID
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    @item.UnitPrice
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+

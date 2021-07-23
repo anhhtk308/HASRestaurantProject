@@ -1,0 +1,89 @@
+﻿@model IEnumerable<HASRestaurant.Context.Contact>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .listright {
+        margin-left: 273px;
+    }
+
+        .listright h2 {
+            margin-bottom: 20px;
+        }
+</style>
+<div class="listright">
+    <h2>Contact</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateMessageDate)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateMessageDate)
+                </td>
+                @if (item.Status == "No response yet")
+                {
+                    <td>
+                        <a href="@Url.Action("SendMessForm", "AdminContact", new { id = item.ContactID })" class="fas fa-paper-plane"></a>
+                    </td>
+                }
+                else
+                {
+                    <td><a href="@Url.Action("Details", "AdminContact", new { id = item.ContactID })" class="fas fa-file-alt"></a></td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+@if (ViewBag.mess != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+                        alert("@ViewBag.mess");
+                    };
+    </script>
+}

@@ -1,0 +1,18 @@
+﻿@model HASRestaurant.Context.Account
+@{
+    ViewBag.Title = "cfRegisterView";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@using (Html.BeginForm("cfRegister", "Login", FormMethod.Post, new { @class = "form-signin" }))
+{
+    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Confirm Register</h1>
+    @*@Html.TextBoxFor(Model => Model.Email, new { @name = "Email", @type = "Email", @id = "Email", @class = "form-control", @placeholder = "Email", @required = "" })
+        @Html.ValidationMessageFor(Model => Model.Email, "", new { @class = "text-danger" })*@
+
+    <input type="text" name="code" class="form-control" placeholder="Confirm Code" required="">
+
+    <button class="btn btn-warning btn-block" type="submit"><i class="fas fa-sign-in-alt"></i>Confirm Register</button>
+    <hr>
+}
+

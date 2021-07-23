@@ -1,0 +1,91 @@
+﻿
+@model IEnumerable<HASRestaurant.Context.Reservation>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .listright {
+        margin-left: 273px;
+    }
+
+        .listright h2 {
+            margin-bottom: 20px;
+        }
+
+    td img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .listright p a {
+        color: #ffffff;
+        background-color: #fb5849;
+        padding: 10px;
+    }
+
+        .listright p a:hover {
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+
+    .listright td a:hover {
+        color: #ff0000;
+    }
+</style>
+
+<div class="listright">
+    <h2>Manager Reservation</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(Model => Model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.NumOfGuests)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.ReservationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.Time)
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.NumOfGuests)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.ReservationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Time)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details","AdminReservation", new { id = item.ReservationID})" class="fas fa-file-alt"></a>
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>
