@@ -10,7 +10,7 @@ Member:
 - HAS Restaurant Website will help customers solve faster, save more time in the problem of table reservation, food order. Customers can easily book a table remotely and order a variety of dishes from the restaurant.
 
 #### 2. Main Function:
-- Reservation function, order, cart, search, pagination, product details, best selling products, payment function, contact, product management, order management, table reservation management, forgot password, change password, register, login...
+- Reservation function, order, cart, search, pagination, product details, best selling products, payment function, contact, product management, order management, table reservation management, confirmation email, recaptcha, forgot password, change password, register, login...
 
 ### II.Project Run Instructions :
 #### System Requirements :
