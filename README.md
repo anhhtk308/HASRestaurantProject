@@ -1,10 +1,4 @@
 ## HAS Restaurant Project
-
-Member:
-##### Hoàng Thị Kim Anh : https://www.facebook.com/profile.php?id=100025749735462
-##### Đỗ Đức Huy : https://www.facebook.com/huylouis6820/
-##### Nguyễn Quang Sang : https://www.facebook.com/SangAtomm
-
 ### I. Website Introduction:
 #### 1. Purpose:
 - HAS Restaurant Website will help customers solve faster, save more time in the problem of table reservation, food order. Customers can easily book a table remotely and order a variety of dishes from the restaurant.
